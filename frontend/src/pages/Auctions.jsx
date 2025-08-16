@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react"
-import API from "../lib/api"
-import { Link } from "react-router-dom"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react";
+import API from "../lib/api";
+import { Link } from "react-router-dom";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { motion } from "framer-motion";
 
 export default function Auctions() {
-  const [list, setList] = useState([])
+  const [list, setList] = useState([]);
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -15,173 +16,129 @@ export default function Auctions() {
     bid_increment: 1,
     start_time: "",
     end_time: "",
-  })
-  const [creating, setCreating] = useState(false)
+  });
 
   async function load() {
-    const res = await API.get("/auctions")
-    setList(res.data)
+    const res = await API.get("/auctions");
+    setList(res.data);
   }
 
   async function create() {
-    try {
-      setCreating(true)
-      const s = await API.post("/auctions", {
-        ...form,
-        start_price: Number(form.start_price),
-        bid_increment: Number(form.bid_increment),
-      })
-      if (s.data?.id) {
-        setForm({
-          title: "",
-          description: "",
-          start_price: 10,
-          bid_increment: 1,
-          start_time: "",
-          end_time: "",
-        })
-        load()
-      }
-    } catch (e) {
-      alert(e.response?.data?.error || e.message)
-    } finally {
-      setCreating(false)
+    const s = await API.post("/auctions", form);
+    if (s.data?.id) {
+      setForm({
+        title: "",
+        description: "",
+        start_price: 10,
+        bid_increment: 1,
+        start_time: "",
+        end_time: "",
+      });
+      load();
     }
   }
 
   useEffect(() => {
-    load()
-  }, [])
+    load();
+  }, []);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white py-12">
-      {/* Neon background glow */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute w-[500px] h-[500px] bg-purple-600/40 rounded-full blur-3xl top-[-100px] left-[-150px] animate-pulse" />
-        <div className="absolute w-[400px] h-[400px] bg-pink-500/30 rounded-full blur-3xl bottom-[-100px] right-[-150px] animate-pulse" />
-        <div className="absolute w-[300px] h-[300px] bg-cyan-400/30 rounded-full blur-3xl bottom-[100px] left-[200px] animate-pulse" />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 p-8 relative overflow-hidden">
+      {/* Glowing star particles */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.1 }}
+        transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
+        className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.15),_transparent_70%)] animate-pulse"
+      />
 
-      <div className="w-[92%] max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* LEFT: Create auction */}
-        <Card className="shadow-[0_0_25px_rgba(255,0,150,0.5)] rounded-2xl bg-gray-900/80 border border-purple-500/50 backdrop-blur-xl">
-          <CardContent className="p-6">
-            <motion.h2
-              className="text-3xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-purple-400 to-cyan-400 drop-shadow-[0_0_15px_rgba(255,0,200,0.8)]"
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              ⚒️ Create Auction (Seller)
-            </motion.h2>
-
-            <div className="space-y-4">
-              <Input
-                placeholder="Title"
-                value={form.title}
-                onChange={(e) => setForm({ ...form, title: e.target.value })}
-                className="bg-gray-800 border-purple-500/40 text-white placeholder-gray-400 focus-visible:ring-purple-500"
-              />
-
-              <Input
-                placeholder="Description"
-                value={form.description}
-                onChange={(e) => setForm({ ...form, description: e.target.value })}
-                className="bg-gray-800 border-purple-500/40 text-white placeholder-gray-400 focus-visible:ring-purple-500"
-              />
-
-              <div className="grid grid-cols-2 gap-4">
-                <Input
-                  type="number"
-                  placeholder="Start Price"
-                  value={form.start_price}
-                  onChange={(e) => setForm({ ...form, start_price: e.target.value })}
-                  className="bg-gray-800 border-purple-500/40 text-white placeholder-gray-400 focus-visible:ring-purple-500"
-                />
-                <Input
-                  type="number"
-                  placeholder="Bid Increment"
-                  value={form.bid_increment}
-                  onChange={(e) => setForm({ ...form, bid_increment: e.target.value })}
-                  className="bg-gray-800 border-purple-500/40 text-white placeholder-gray-400 focus-visible:ring-purple-500"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <Input
-                  type="datetime-local"
-                  value={form.start_time}
-                  onChange={(e) => setForm({ ...form, start_time: e.target.value })}
-                  className="bg-gray-800 border-purple-500/40 text-white focus-visible:ring-purple-500"
-                />
-                <Input
-                  type="datetime-local"
-                  value={form.end_time}
-                  onChange={(e) => setForm({ ...form, end_time: e.target.value })}
-                  className="bg-gray-800 border-purple-500/40 text-white focus-visible:ring-purple-500"
-                />
-              </div>
-
-              <Button
-                onClick={create}
-                disabled={creating}
-                className="w-full mt-2 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-pink-600 hover:to-purple-500 text-white font-semibold shadow-[0_0_15px_rgba(255,0,150,0.6)]"
+      <div className="grid gap-8 md:grid-cols-2 relative z-10">
+        {/* Create Auction Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Card className="shadow-2xl border border-indigo-600 bg-gray-900/70 backdrop-blur-2xl rounded-3xl hover:shadow-indigo-500/50 transition">
+            <CardHeader>
+              <CardTitle className="text-xl font-bold text-indigo-400 drop-shadow-lg">Create Auction (Sellers)</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {["title","description","start_price","bid_increment","start_time","end_time"].map((field, i) => (
+                <motion.div
+                  key={field}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + i * 0.05 }}
+                >
+                  <Label className="text-indigo-200 capitalize">{field.replace("_", " ")}</Label>
+                  <Input
+                    type={field.includes("price") || field.includes("increment") ? "number" : field.includes("time") ? "datetime-local" : "text"}
+                    placeholder={field.replace("_", " ")}
+                    value={form[field]}
+                    onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                    className="mt-1 bg-gray-900/60 border-indigo-600 text-white placeholder-gray-400 focus:ring-indigo-500"
+                  />
+                </motion.div>
+              ))}
+            </CardContent>
+            <CardFooter>
+              <motion.div
+                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,0,255,0.6)" }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
-                {creating ? "Creating..." : "Create Auction"}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+                <Button
+                  onClick={create}
+                  className="w-full py-3 text-lg bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white shadow-lg rounded-xl"
+                >
+                  Create Auction
+                </Button>
+              </motion.div>
+            </CardFooter>
+          </Card>
+        </motion.div>
 
-        {/* RIGHT: Available/Upcoming auctions */}
-        <Card className="shadow-[0_0_25px_rgba(0,255,255,0.4)] rounded-2xl bg-gray-900/80 border border-cyan-400/50 backdrop-blur-xl">
-          <CardContent className="p-6">
-            <motion.h3
-              className="text-3xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_12px_rgba(0,255,255,0.7)]"
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-            >
-              📜 Available Auctions
-            </motion.h3>
-
-            <div className="max-h-[520px] overflow-y-auto pr-2">
-              <ul className="space-y-3">
-                {list.length === 0 ? (
-                  <p className="text-gray-400">No auctions available yet.</p>
-                ) : (
-                  list.map((a) => (
-                    <li
+        {/* Auction List */}
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7 }}
+        >
+          <Card className="shadow-2xl border border-purple-600 bg-gray-900/70 backdrop-blur-2xl rounded-3xl hover:shadow-purple-500/50 transition">
+            <CardHeader>
+              <CardTitle className="text-xl font-bold text-purple-400 drop-shadow-lg">Live Auctions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {list.length === 0 ? (
+                <p className="text-gray-400">No auctions available yet.</p>
+              ) : (
+                <ul className="space-y-3">
+                  {list.map((a, i) => (
+                    <motion.li
                       key={a.id}
-                      className="p-4 rounded-lg bg-gray-800/70 border border-gray-700 hover:border-purple-500 transition-colors"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * i }}
+                      className="flex items-center justify-between rounded-lg border border-gray-700 p-3 shadow-sm hover:bg-gray-700/30 hover:shadow-indigo-500/40 transition cursor-pointer"
                     >
-                      <div className="flex items-center justify-between gap-3">
+                      <div>
                         <Link
                           to={`/auctions/${a.id}`}
-                          className="text-lg font-semibold text-purple-300 hover:text-pink-400 drop-shadow-[0_0_8px_rgba(255,0,200,0.6)]"
+                          className="text-lg font-medium text-indigo-400 hover:text-pink-400 hover:underline transition"
                         >
                           {a.title}
                         </Link>
-
-                        <span
-                          className="text-xs uppercase tracking-wide px-2 py-1 rounded-full bg-gray-900 border border-cyan-400/40 text-cyan-300"
-                          title="Status"
-                        >
-                          {a.status}
-                        </span>
+                        <p className="text-sm text-gray-400">{a.status}</p>
                       </div>
-
-                      {a.description ? (
-                        <p className="mt-1 text-sm text-gray-400 line-clamp-2">{a.description}</p>
-                      ) : null}
-                    </li>
-                  ))
-                )}
-              </ul>
-            </div>
-          </CardContent>
-        </Card>
+                      <span className="text-sm font-semibold text-gray-300">₹{a.start_price}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
-  )
+  );
 }
