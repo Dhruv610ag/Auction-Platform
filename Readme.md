@@ -1,11 +1,13 @@
 # 🎉 BID BUDDY  
 
-![Status](https://img.shields.io/badge/Status-Live-brightgreen?style=plastic) 
-![Frontend](https://img.shields.io/badge/Frontend-React-blue?style=plastic&logo=react&logoColor=white) 
-![Backend](https://img.shields.io/badge/Backend-Node.js-green?style=plastic&logo=node.js&logoColor=white) 
-![Database](https://img.shields.io/badge/Database-MongoDB-darkgreen?style=plastic&logo=mongodb&logoColor=white) 
-![Overleaf](https://img.shields.io/badge/Overleaf-%2347A141.svg?style=plastic&logo=overleaf&logoColor=white) 
-![License](https://img.shields.io/badge/License-MIT-yellow?style=plastic)
+![BID BUDDY](https://img.shields.io/badge/Status-Live-brightgreen?style=plastic) 
+![React](https://img.shields.io/badge/Frontend-React-%2361DAFB.svg?style=plastic&logo=react&logoColor=black) 
+![Node.js](https://img.shields.io/badge/Backend-Node.js-%23339933.svg?style=plastic&logo=node.js&logoColor=white) 
+![Shadcn](https://img.shields.io/badge/UI-Shadcn-%23000000.svg?style=plastic&logo=shadcnui&logoColor=white) 
+![Supabase](https://img.shields.io/badge/Auth%2FBackend-Supabase-%233FCF8E.svg?style=plastic&logo=supabase&logoColor=white) 
+![Render](https://img.shields.io/badge/Hosting-Render-%2346E3B7.svg?style=plastic&logo=render&logoColor=black) 
+![Redis](https://img.shields.io/badge/Cache-Redis-red?style=for-the-badge&logo=redis&logoColor=white)
+
   
 
 **🔗 Live Site:** [BID BUDDY](https://auction-platform-1-507o.onrender.com/)  
