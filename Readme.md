@@ -6,7 +6,7 @@
 ![Shadcn](https://img.shields.io/badge/UI-Shadcn-%23000000.svg?style=plastic&logo=shadcnui&logoColor=white) 
 ![Supabase](https://img.shields.io/badge/Auth%2FBackend-Supabase-%233FCF8E.svg?style=plastic&logo=supabase&logoColor=white) 
 ![Render](https://img.shields.io/badge/Hosting-Render-%2346E3B7.svg?style=plastic&logo=render&logoColor=black) 
-![Redis](https://img.shields.io/badge/Cache-Redis-red?style=for-the-badge&logo=redis&logoColor=white)
+![Redis](https://img.shields.io/badge/Cache-Redis-%23DC382D.svg?style=plastic&logo=redis&logoColor=white)
 
   
 
