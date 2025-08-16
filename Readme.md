@@ -1,10 +1,12 @@
 # 🎉 BID BUDDY  
 
-![BID BUDDY Banner](https://img.shields.io/badge/Status-Live-brightgreen?style=for-the-badge)  
-![React](https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react)  
-![Node.js](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js)  
-![MongoDB](https://img.shields.io/badge/Database-MongoDB-darkgreen?style=for-the-badge&logo=mongodb)  
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)  
+![Status](https://img.shields.io/badge/Status-Live-brightgreen?style=plastic) 
+![Frontend](https://img.shields.io/badge/Frontend-React-blue?style=plastic&logo=react&logoColor=white) 
+![Backend](https://img.shields.io/badge/Backend-Node.js-green?style=plastic&logo=node.js&logoColor=white) 
+![Database](https://img.shields.io/badge/Database-MongoDB-darkgreen?style=plastic&logo=mongodb&logoColor=white) 
+![Overleaf](https://img.shields.io/badge/Overleaf-%2347A141.svg?style=plastic&logo=overleaf&logoColor=white) 
+![License](https://img.shields.io/badge/License-MIT-yellow?style=plastic)
+  
 
 **🔗 Live Site:** [BID BUDDY](https://auction-platform-1-507o.onrender.com/)  
 **📦 Repository:** [GitHub Repo](https://github.com/Dhruv610ag/BID-BUDDY.git)  
