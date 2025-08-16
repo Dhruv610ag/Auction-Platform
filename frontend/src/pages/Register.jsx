@@ -52,7 +52,7 @@ export default function Register() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            📝 Register
+            🚘 Register
           </motion.h2>
 
           <div className="w-full flex flex-col gap-4">

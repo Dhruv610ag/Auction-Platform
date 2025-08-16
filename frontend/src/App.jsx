@@ -15,10 +15,12 @@ export default function App() {
         <div className="absolute w-[300px] h-[300px] bg-cyan-400/30 rounded-full blur-3xl bottom-[100px] left-[200px] animate-pulse" />
       </div>
 
-      <Card className="w-[420px] shadow-[0_0_30px_rgba(255,0,150,0.5)] rounded-2xl bg-gray-900/80 border border-purple-500/50 backdrop-blur-xl">
-        <CardContent className="p-6 flex flex-col items-center">
+      <Card className="w-[460px] shadow-[0_0_35px_rgba(255,0,150,0.6)] rounded-2xl bg-gray-900/80 border border-purple-500/50 backdrop-blur-xl">
+        <CardContent className="p-8 flex flex-col items-center text-center gap-6">
+          
+          {/* Title */}
           <motion.h1
-            className="text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-purple-400 to-cyan-400 drop-shadow-[0_0_10px_rgba(255,0,200,0.8)]"
+            className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-purple-400 to-cyan-400 drop-shadow-[0_0_12px_rgba(255,0,200,0.8)]"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -26,7 +28,19 @@ export default function App() {
             ⚡ Bid Buddy ⚡
           </motion.h1>
 
-          <nav className="flex flex-col gap-4 w-full">
+          {/* Tagline */}
+          <motion.p
+            className="text-lg text-gray-300 font-medium italic drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
+            Your smart companion for thrilling auctions — <br/> 
+            Bid. Win. Celebrate. 🌟
+          </motion.p>
+
+          {/* Navigation Buttons */}
+          <nav className="flex flex-col gap-4 w-full mt-4">
             <Link to="/login" className="w-full">
               <Button 
                 variant="default" 
